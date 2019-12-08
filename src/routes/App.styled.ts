@@ -51,4 +51,10 @@ export const Styled = styled(StyledFonts)`
       color: #fff;
     }
   }
+  label {
+    color: rgba(170, 170, 170);
+    font-size: 14px;
+    line-height: 18px;
+    font-family: MavenPro-Bold;
+  }
 `;

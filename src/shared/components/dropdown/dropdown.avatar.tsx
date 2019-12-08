@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { Styled as StyledLanguages } from "./dropdown.languages";
 import { useMouseDown } from "./dropdown.utils";
 import { compose } from "recompose";
 import { connect } from "react-redux";
+import { StyledDropdown } from "./dropdown.styled";
 
 interface IProps {
   profile: any;
 }
 
-const Styled = styled(StyledLanguages)`
+const Styled = styled(StyledDropdown)`
   .dropdown-item-selected {
     display: flex;
   }

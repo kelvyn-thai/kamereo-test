@@ -6,18 +6,25 @@ interface IProps {
   labelInput: string | "";
   name: string | "";
   value: string | "";
+  onChange: (e: any) => void;
 }
 
 const Styled = styled(StyledInput)``;
 
 const InputText = (props: IProps) => {
-  const { labelInput, ...rest } = props;
+  const { labelInput, value, onChange, ...rest } = props;
   return (
     <Styled className="input-wrapper">
-      <label htmlFor="" className="label-input">
-        {labelInput}
-      </label>
-      <input type="text" className="input input-text" {...rest} />
+      {!!labelInput && (
+        <label htmlFor="" className="label-input">
+          {labelInput}
+        </label>
+      )}
+      <input
+        type="text"
+        className="input input-text"
+        {...{ ...rest, value, onChange }}
+      />
     </Styled>
   );
 };

@@ -1,27 +1,21 @@
 import React from "react";
-import { useMouseDown } from "./dropdown.utils";
 import styled from "styled-components";
 import { StyledDropdown } from "./dropdown.styled";
+import { useMouseDown } from "./dropdown.utils";
+import { citiesFactories } from "src/shared/json";
 
-interface IProps {
-  data: any[];
-}
+interface IProps {}
 
 const Styled = styled(StyledDropdown)``;
 
-const Dropdown = (props: IProps) => {
-  const { data } = props;
-  const notEmpty = data.length > 0;
-  const [state, setState] = React.useState({
-    selected: notEmpty
-      ? data[0]
-      : {
-          nativeName: "",
-          code: ""
-        },
-    toggle: false
-  });
+const DropdownCity = (props: IProps) => {
   const ref: any = React.useRef(null);
+  const [state, setState] = React.useState({
+    toggle: false,
+    selected: {
+      city: "City"
+    }
+  });
   const handleClickOutside = (e: any) => {
     if (state.toggle && ref.current && !ref.current.contains(e.target)) {
       setState({
@@ -44,19 +38,19 @@ const Dropdown = (props: IProps) => {
           })
         }
       >
-        {!!state.selected && state.selected.nativeName}
+        {!!state.selected && state.selected.city}
       </div>
       {state.toggle && (
         <div className="extra" ref={ref}>
-          {data.map(item => (
+          {citiesFactories.map((item, index) => (
             <div
               className="dropdown-item"
-              key={item.code}
+              key={index}
               onClick={() =>
                 setState({ ...state, toggle: !state.toggle, selected: item })
               }
             >
-              {item.nativeName}
+              {item.city}
             </div>
           ))}
         </div>
@@ -65,4 +59,4 @@ const Dropdown = (props: IProps) => {
   );
 };
 
-export default Dropdown;
+export default DropdownCity;

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import withTranslate from "src/shared/components/hoc/withTranslate";
+import { readFile, createImage, rotate, empty } from "src/shared/utils";
+import { EditProfileContext } from ".";
 
 interface IProps {
   profile: any;
@@ -44,28 +46,55 @@ const Styled = styled.div`
 `;
 
 const Avatar = (props: IProps) => {
+  const { state, setState }: any = React.useContext(EditProfileContext);
   const {
     title,
     btnRemove,
     btnUpload
   } = props.translate.editProfile.storeImage;
   const { logoUrl } = props.profile.data;
-  const uploadedPreview = !!props.preview;
+  const uploadedPreview = !!state.preview;
+  const handleChangeImage = (e: any) => {
+    if (!empty(e.target.files)) {
+      let file = e.target.files[0];
+      readFile(file)
+        .then(createImage)
+        .then(rotate.bind(undefined, file.type))
+        .then((blob: any) => {
+          blob.name = file.name.replace(/\.jpg|\.jpeg/i, ".png");
+          setState({
+            ...state,
+            file,
+            preview: URL.createObjectURL(blob)
+          });
+        })
+        .catch((e: any) => {
+          console.log(e);
+        });
+    }
+  };
+  const handleRemoveImagePreview = () => {
+    if (!!state.preview) {
+      setState({
+        ...state,
+        file: null,
+        preview: ""
+      });
+    }
+  };
   return (
     <Styled className="avatar">
       <h4 className="title">{title}</h4>
       <div className="cover-image">
         {uploadedPreview ? (
-          <img src={props.preview} alt="" />
+          <img src={state.preview} alt="" />
         ) : (
           <img src={!!logoUrl ? logoUrl : "images/logo.png"} alt="" />
         )}
       </div>
       <div className="group-btn">
         <button
-          onClick={() =>
-            uploadedPreview ? props.handleRemoveImagePreview() : false
-          }
+          onClick={() => (uploadedPreview ? handleRemoveImagePreview() : false)}
           className={`btn ${
             uploadedPreview ? "btn-enabled" : "btn-disabled"
           }  `}
@@ -79,7 +108,7 @@ const Avatar = (props: IProps) => {
             name=""
             id=""
             className="image-background"
-            onChange={props.handleChangeInput}
+            onChange={handleChangeImage}
           />
         </button>
       </div>

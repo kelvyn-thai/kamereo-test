@@ -21,8 +21,8 @@ export const Styled = styled.div`
     height: 32px;
     cursor: pointer;
     :last-child {
-      width: 24px;
-      height: 24px;
+      width: 16px;
+      height: 16px;
     }
   }
   .block-title h2.title {
