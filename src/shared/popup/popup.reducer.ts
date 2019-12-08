@@ -2,12 +2,14 @@ import { ACTION_TOGGLE_POPUP } from "./popup.constant";
 
 export interface IReducer {
   toggle: boolean;
-  data: string;
+  data: any;
 }
 
 const initialState: IReducer = {
   toggle: false,
-  data: ""
+  data: {
+    comp: ""
+  }
 };
 
 export default (

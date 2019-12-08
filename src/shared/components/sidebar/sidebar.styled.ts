@@ -34,7 +34,7 @@ export const HookStyled = styled.div`
 
 export const Styled = styled.div`
   &.sidebar {
-    position: absolute;
+    position: fixed;
     top: 70px;
     left: 0;
     width: 300px;

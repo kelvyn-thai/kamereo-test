@@ -8,11 +8,7 @@ interface IProps {}
 const Styled = styled.div`
   padding-left: 300px;
   padding-top: 70px;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
+  overflow: hidden;
 `;
 
 const Layout = (WrappedComponent: any) => (props: IProps) => {

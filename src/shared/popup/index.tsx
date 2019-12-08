@@ -1,36 +1,75 @@
 import React from "react";
-import styled from "styled-components";
-import withPopup, { IProps } from "./popup.enhance";
+import { connect } from "react-redux";
+import { actionTogglePopup as togglePopup } from "./popup.actions";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
+import { getPopupFactories } from "src/externals/popup";
 
-const Styled = styled.div`
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  &.open-popup {
-    display: block;
-  }
-`;
+interface IProps {
+  popup: any;
+  location: any;
+  togglePopup: (payload: any) => { type: string; payload: any };
+}
 
 const Popup = (props: IProps) => {
-  const { popup } = props;
-  const { data, toggle } = popup;
-  const renderPopupContent = () => {
-    try {
-      return import(data);
-    } catch (error) {
-      return <div className="error">Something went wrong</div>;
+  const { popup, location, togglePopup } = props;
+  const [loaded, setLoaded] = React.useState(false);
+  const [Comp, setComp]: any = React.useState(<></>);
+  const factories: any = getPopupFactories();
+  React.useEffect(() => {
+    if (popup.toggle) {
+      togglePopup({
+        toggle: false
+      });
     }
-  };
-  return (
-    <Styled className={`popup ${toggle ? "open-popup" : ""}`}>
-      {toggle && renderPopupContent()}
-    </Styled>
-  );
+  }, [location.pathname]);
+  React.useEffect(() => {
+    if (popup.toggle && popup.data.comp) {
+      (
+        factories[popup.data.comp] ||
+        function() {
+          return Promise.reject({
+            message: "Component not found"
+          });
+        }
+      )()
+        .then((res: any) => {
+          // Comp = res;
+          setComp(res);
+          setLoaded(true);
+        })
+        .catch((e: any) => {
+          setLoaded(false);
+        });
+    }
+  }, [popup]);
+  return popup.toggle ? (
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#ccc",
+        backgroundColor: "rgba(12, 11, 11,0.9)",
+        zIndex: 1000,
+        position: "fixed",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        top: 0
+      }}
+    >
+      {loaded ? <Comp.default /> : "something wrong!"}
+    </div>
+  ) : null;
 };
 
-export default withPopup(Popup);
+export default compose<IProps, any>(
+  withRouter,
+  connect(
+    (state: any) => ({
+      popup: state.popup
+    }),
+    {
+      togglePopup
+    }
+  )
+)(Popup);

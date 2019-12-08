@@ -69,7 +69,7 @@ const Dropdown = (props: IProps) => {
       });
     }
   };
-  const [] = useMouseDown({
+  const []: any = useMouseDown({
     fn: handleClickOutside
   });
   return (

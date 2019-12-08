@@ -16,7 +16,7 @@ const enhance = (WrappedComponent: any) => (props: IProps) => {
   return (
     <ErrorBoundary>
       <Helmet title={helmet} />
-      <Styled className="profile">
+      <Styled className="profile-wrapper">
         <WrappedComponent {...props} />
       </Styled>
     </ErrorBoundary>

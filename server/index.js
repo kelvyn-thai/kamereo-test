@@ -22,7 +22,12 @@ app.get("/profile", (req, res) => {
       id: 1,
       name: "Jayce Thai",
       role: "Administrator",
-      avatar_url: `${ENVS.API_DOMAIN}/images/profile/avatar_url.jpg`
+      avatar_url: `${ENVS.API_DOMAIN}/images/profile/avatar_url.jpg`,
+      address: `42/24 Trần Đình Xu Q.1 TP HCM`,
+      phone: `+84902751467`,
+      company: `Kameremo`,
+      company_addr: `Nguyen Cuu Van, Binh Thanh Dist, HCMC`,
+      mst: `P7774994`
     }
   });
 });

@@ -34,20 +34,21 @@ export default {
     brand: "KAMEREO",
     storeInfo: "Store Information",
     infoDetails: {
-      storeInfo: "STORE INFO.",
+      title: "STORE INFO.",
       name: "Name",
       address: "Address",
       phone: "Phone #"
     },
     redInvoiceInfo: {
-      companyName: "K.O.I The international Company",
-      address: "9682 Wakehurst Avenue Airlington Heights, IL 60004",
-      mst: "P77744944"
+      title: "RED INVOICE INFO.",
+      companyName: "Company Name",
+      address: "Address",
+      mst: "MST"
     },
-    btnSubmit: "Edit Profile",
-    message: {
+    btnEditProfile: "Edit Profile",
+    delivery: {
       title: "DELIVERY DEFAULT MESSAGE",
-      btnSubmit: "Update"
+      btnUpdate: "Update"
     }
   }
 };
