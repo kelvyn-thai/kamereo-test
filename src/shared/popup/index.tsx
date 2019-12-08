@@ -17,11 +17,11 @@ const Popup = (props: IProps) => {
   const [Comp, setComp]: any = React.useState(<></>);
   const factories: any = getPopupFactories();
   React.useEffect(() => {
-    if (popup.toggle) {
-      togglePopup({
-        toggle: false
-      });
-    }
+    // if (popup.toggle) {
+    //   togglePopup({
+    //     toggle: false
+    //   });
+    // }
   }, [location.pathname]);
   React.useEffect(() => {
     if (popup.toggle && popup.data.comp) {
@@ -34,15 +34,15 @@ const Popup = (props: IProps) => {
         }
       )()
         .then((res: any) => {
-          // Comp = res;
           setComp(res);
           setLoaded(true);
         })
         .catch((e: any) => {
+          console.log(e)
           setLoaded(false);
         });
     }
-  }, [popup]);
+  }, [popup.toggle]);
   return popup.toggle ? (
     <div
       style={{

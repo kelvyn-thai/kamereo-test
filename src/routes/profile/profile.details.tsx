@@ -21,7 +21,6 @@ const Styled = styled.div`
     border: solid 2px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     .cover-image {
-      border: solid 2px #2f904f;
       border-radius: 4px;
     }
     .extra {
@@ -63,14 +62,7 @@ const ProfileDetails = (props: IProps) => {
     redInvoiceInfo,
     btnEditProfile
   } = props.translate.profile;
-  const {
-    name,
-    address,
-    phone,
-    company,
-    company_addr,
-    mst
-  } = props.profile.data;
+  const { name, address, phone, redInvoice } = props.profile.data;
   return (
     <Styled className="profile-details">
       <div className="cover-image">
@@ -95,15 +87,15 @@ const ProfileDetails = (props: IProps) => {
         <h4 className="title">{redInvoiceInfo.title}</h4>
         <div className="hook">
           <p className="title">{redInvoiceInfo.companyName}</p>
-          <p className="description ellipsis">{company}</p>
+          <p className="description ellipsis">{redInvoice.name}</p>
         </div>
         <div className="hook">
           <p className="title">{redInvoiceInfo.address}</p>
-          <p className="description ellipsis">{company_addr}</p>
+          <p className="description ellipsis">{redInvoice.address}</p>
         </div>
         <div className="hook">
           <p className="title">{redInvoiceInfo.mst}</p>
-          <p className="description ellipsis">{mst}</p>
+          <p className="description ellipsis">{redInvoice.taxCode}</p>
         </div>
       </div>
       <button

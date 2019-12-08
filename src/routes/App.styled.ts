@@ -16,6 +16,11 @@ export const StyledFonts = styled.div`
 `;
 
 export const Styled = styled(StyledFonts)`
+  &.open-popup {
+    overflow: hidden;
+    max-height: 100vh;
+    height: 100vh;
+  }
   * {
     font-family: MavenPro-Regular;
     color: #2f904f;
@@ -37,5 +42,13 @@ export const Styled = styled(StyledFonts)`
     border-radius: 4px;
     line-height: 50px;
     font-family: MavenPro-Bold;
+    &.btn-disabled {
+      background: transparent;
+      color: #aaa;
+    }
+    &.btn-enabled {
+      background: #2f904f;
+      color: #fff;
+    }
   }
 `;

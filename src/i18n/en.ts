@@ -50,5 +50,29 @@ export default {
       title: "DELIVERY DEFAULT MESSAGE",
       btnUpdate: "Update"
     }
+  },
+  editProfile: {
+    title: "EDIT STORE PROFILE",
+    storeImage: {
+      title: "STORE IMAGE",
+      btnRemove: "Remove",
+      btnUpload: "Upload Image"
+    },
+    form: {
+      infoDetails: {
+        title: "BASIC INFO.",
+        name: "Store Name",
+        address: "Store Address",
+        phone: "Phone #"
+      },
+      redInvoiceInfo: {
+        title: "RED INVOICE INFO.",
+        companyName: "Company Name",
+        address: "Company Address",
+        mst: "MST"
+      },
+      btnSave: "Save",
+      btnCancel: "Cancel"
+    }
   }
 };

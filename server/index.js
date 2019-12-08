@@ -20,14 +20,21 @@ app.get("/profile", (req, res) => {
     status: 1,
     data: {
       id: 1,
-      name: "Jayce Thai",
+      logoUrl: `${ENVS.API_DOMAIN}/images/logo.png`,
+      name: "K.O.I The",
+      address: `42/24 Trần Đình Xu`,
+      district: `Q.1`,
+      city: `TP HCM`,
+      phone: `+84902751467`,
       role: "Administrator",
       avatar_url: `${ENVS.API_DOMAIN}/images/profile/avatar_url.jpg`,
-      address: `42/24 Trần Đình Xu Q.1 TP HCM`,
-      phone: `+84902751467`,
-      company: `Kameremo`,
-      company_addr: `Nguyen Cuu Van, Binh Thanh Dist, HCMC`,
-      mst: `P7774994`
+      redInvoice: {
+        name: "Kamereo",
+        address: "Nguyen Cuu Van",
+        district: "Binh Thanh",
+        city: "HCMC",
+        taxCode: "P7774994"
+      }
     }
   });
 });
