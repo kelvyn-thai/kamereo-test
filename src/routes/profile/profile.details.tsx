@@ -49,11 +49,13 @@ const Styled = styled.div`
       color: #000;
       max-width: 30%;
       text-align: left;
-      overflow-x: scroll;
-      text-overflow: unset;
     }
     .btn {
       margin-top: 20px;
+    }
+    .extra .hook .ellipsis {
+      overflow-x: scroll;
+      text-overflow: unset;
     }
   }
 `;
