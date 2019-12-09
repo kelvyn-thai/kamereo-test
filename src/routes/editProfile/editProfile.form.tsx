@@ -8,9 +8,15 @@ import InputText from "src/shared/components/input/input.text";
 import InputPhone from "src/shared/components/input/input.phone";
 import InputAddress from "src/shared/components/input/input.address";
 import { EditProfileContext } from ".";
+import {
+  ACTION_UPDATE_PROFILE,
+  ACTION_UDPATE_AVATAR
+} from "../profile/profile.constant";
 
 interface IProps {
   togglePopup: (payload: any) => { type: string; payload: any };
+  updateProfile: (payload: any) => { type: string; payload: any };
+  updateAvatar: (payload: any) => { type: string; payload: any };
   translate: any;
 }
 
@@ -24,7 +30,9 @@ const Styled = styled.div`
 `;
 
 const Form = (props: IProps) => {
-  const { state, setState }: any = React.useContext(EditProfileContext);
+  const { state, setState, initialState }: any = React.useContext(
+    EditProfileContext
+  );
   const {
     infoDetails,
     redInvoiceInfo,
@@ -36,9 +44,50 @@ const Form = (props: IProps) => {
       ...state,
       form: {
         ...state.form,
-        [e.target.name]: e.target.value
+        [e.target.name]: ["phone"].includes(e.target.name)
+          ? e.target.validity.valid
+            ? e.target.value
+            : state.form[e.target.name]
+          : e.target.value
       }
     });
+  };
+  const handleSubmitForm = async () => {
+    try {
+      setState({
+        ...state,
+        isFetching: true
+      });
+      const formDt = new FormData();
+      formDt.append("avatar", state.file);
+      await props.updateAvatar(formDt);
+      await props.updateProfile({
+        name: state.form.name,
+        address: state.form.address,
+        phone: state.form.phone,
+        district: state.form.district,
+        city: state.form.city,
+        redInvoice: {
+          name: state.form.redInvoice_name,
+          address: state.form.redInvoice_address,
+          taxCode: state.form.redInvoice_taxCode,
+          city: state.form.redInvoice_city,
+          district: state.form.redInvoice_district
+        }
+      });
+      await setState({
+        ...state,
+        isFetching: false,
+        isFetched: true
+      });
+      props.togglePopup({ toggle: false });
+    } catch (error) {
+      setState({
+        ...state,
+        isFetching: false,
+        isFetched: false
+      });
+    }
   };
 
   return (
@@ -51,18 +100,27 @@ const Form = (props: IProps) => {
             name="name"
             value={state.form.name}
             onChange={handleInputChange}
+            placeholder="Name"
           />
           <InputAddress
             labelInput={infoDetails.address}
             name="address"
             value={state.form.address}
             onChange={handleInputChange}
+            placeholder="Address"
+            onChangeDistrict={(district: string) =>
+              setState({ ...state, form: { ...state.form, district } })
+            }
+            onChangeCity={(city: string) =>
+              setState({ ...state, form: { ...state.form, city } })
+            }
           />
           <InputPhone
             labelInput={infoDetails.phone}
             name="phone"
             value={state.form.phone}
             onChange={handleInputChange}
+            placeholder="Phone"
           />
         </div>
         <div className="extra">
@@ -72,24 +130,47 @@ const Form = (props: IProps) => {
             name="redInvoice_name"
             value={state.form.redInvoice_name}
             onChange={handleInputChange}
+            placeholder="Company name"
           />
           <InputAddress
             labelInput={redInvoiceInfo.address}
             name="redInvoice_address"
             value={state.form.redInvoice_address}
             onChange={handleInputChange}
+            placeholder="Address"
+            onChangeDistrict={(redInvoice_district: string) =>
+              setState({
+                ...state,
+                form: { ...state.form, redInvoice_district }
+              })
+            }
+            onChangeCity={(redInvoice_city: string) =>
+              setState({ ...state, form: { ...state.form, redInvoice_city } })
+            }
           />
           <InputText
             labelInput={redInvoiceInfo.mst}
             name="redInvoice_taxCode"
             value={state.form.redInvoice_taxCode}
             onChange={handleInputChange}
+            placeholder="Tax code"
           />
         </div>
       </form>
       <div className="group-btn">
-        <button className="btn btn-enabled">{btnSave}</button>
-        <button className="btn btn-disabled">{btnCancel}</button>
+        <button className="btn btn-enabled" onClick={handleSubmitForm}>
+          {`${btnSave}${state.isFetching ? "..." : ""}`}
+        </button>
+        <button
+          className="btn btn-disabled"
+          onClick={() =>
+            setState({
+              ...initialState
+            })
+          }
+        >
+          {btnCancel}
+        </button>
       </div>
     </Styled>
   );
@@ -97,7 +178,12 @@ const Form = (props: IProps) => {
 
 export default compose<IProps, any>(
   connect((state: any) => ({}), {
-    togglePopup
+    togglePopup,
+    updateProfile: (payload: any) => ({
+      type: ACTION_UPDATE_PROFILE,
+      payload
+    }),
+    updateAvatar: (payload: any) => ({ type: ACTION_UDPATE_AVATAR, payload })
   }),
   withTranslate
 )(Form);

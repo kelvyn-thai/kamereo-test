@@ -12,7 +12,7 @@ export const translateByLanguage = (language: string) => {
   }
 };
 
-export const languages = { en, vi };
+export const languages = { en };
 
 export const isoLangs: any = {
   ab: {

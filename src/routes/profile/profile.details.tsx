@@ -49,6 +49,8 @@ const Styled = styled.div`
       color: #000;
       max-width: 30%;
       text-align: left;
+      overflow-x: scroll;
+      text-overflow: unset;
     }
     .btn {
       margin-top: 20px;
@@ -62,7 +64,14 @@ const ProfileDetails = (props: IProps) => {
     redInvoiceInfo,
     btnEditProfile
   } = props.translate.profile;
-  const { name, address, phone, redInvoice } = props.profile.data;
+  const {
+    name,
+    address,
+    phone,
+    redInvoice,
+    city,
+    district
+  } = props.profile.data;
   return (
     <Styled className="profile-details">
       <div className="cover-image">
@@ -76,7 +85,7 @@ const ProfileDetails = (props: IProps) => {
         </div>
         <div className="hook">
           <p className="title">{infoDetails.address}</p>
-          <p className="description ellipsis">{address}</p>
+          <p className="description ellipsis">{`${address} ${district} ${city}`}</p>
         </div>
         <div className="hook">
           <p className="title">{infoDetails.phone}</p>
@@ -91,7 +100,7 @@ const ProfileDetails = (props: IProps) => {
         </div>
         <div className="hook">
           <p className="title">{redInvoiceInfo.address}</p>
-          <p className="description ellipsis">{redInvoice.address}</p>
+          <p className="description ellipsis">{`${redInvoice.address} ${redInvoice.district} ${redInvoice.city}`}</p>
         </div>
         <div className="hook">
           <p className="title">{redInvoiceInfo.mst}</p>

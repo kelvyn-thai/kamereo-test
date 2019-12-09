@@ -74,5 +74,13 @@ export default {
       btnSave: "Save",
       btnCancel: "Cancel"
     }
+  },
+  dropdown: {
+    city: {
+      title: "City"
+    },
+    district: {
+      title: "District"
+    }
   }
 };

@@ -6,13 +6,12 @@ interface IProps {
   labelInput: string | "";
   name: string | "";
   value: string | "";
-  onChange: (e: any) => void;
 }
 
 const Styled = styled(StyledInput)``;
 
-const InputText = (props: IProps) => {
-  const { labelInput, value, onChange, ...rest } = props;
+const InputText = (props: IProps & any) => {
+  const { labelInput, ...rest } = props;
   return (
     <Styled className="input-wrapper">
       {!!labelInput && (
@@ -23,7 +22,8 @@ const InputText = (props: IProps) => {
       <input
         type="text"
         className="input input-text"
-        {...{ ...rest, value, onChange }}
+        maxLength="50"
+        {...rest}
       />
     </Styled>
   );

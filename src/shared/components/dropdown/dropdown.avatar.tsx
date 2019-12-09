@@ -65,7 +65,7 @@ const DropdownAvatar = (props: IProps) => {
           <img src={profile.data.avatar_url} alt="" />
         </div>
         <div className="hook">
-          <p className="name">{profile.data.name}</p>
+          <p className="name">{profile.data.full_name}</p>
           <p className="role">{profile.data.role}</p>
         </div>
       </div>

@@ -1,5 +1,9 @@
 import exif from "exif-js";
 
+export const EmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+export const PhoneRegex = /^[0-9]+$/;
+
 export const getEnvs = () => ({
   API_DOMAIN: `http://localhost:8080`
 });

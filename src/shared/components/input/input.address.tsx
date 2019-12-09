@@ -45,8 +45,15 @@ const Styled = styled.div`
   }
 `;
 
-const InputAddress = (props: IProps) => {
-  const { labelInput, name, value, onChange } = props;
+const InputAddress = (props: IProps & any) => {
+  const {
+    labelInput,
+    name,
+    value,
+    onChange,
+    onChangeCity,
+    onChangeDistrict
+  } = props;
   return (
     <Styled className="input-address">
       <label className="label-input">{labelInput}</label>
@@ -57,8 +64,8 @@ const InputAddress = (props: IProps) => {
           name={name}
           value={value}
         />
-        <DropdonwDistrict />
-        <DropdownCity />
+        <DropdonwDistrict onChangeDistrict={onChangeDistrict} />
+        <DropdownCity onChangeCity={onChangeCity} />
       </div>
     </Styled>
   );

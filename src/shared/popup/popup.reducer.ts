@@ -4,11 +4,10 @@ export interface IReducer {
   toggle: boolean;
   data: any;
 }
-//TODO: mockup
 const initialState: IReducer = {
-  toggle: true,
+  toggle: false,
   data: {
-    comp: "edit-profile"
+    comp: ""
   }
 };
 

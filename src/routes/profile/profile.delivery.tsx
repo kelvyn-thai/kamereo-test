@@ -4,6 +4,7 @@ import withTranslate from "src/shared/components/hoc/withTranslate";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import { actionTogglePopup as togglePopup } from "src/shared/popup/popup.actions";
+import InputText from "src/shared/components/input/input.text";
 interface IProps {
   translate: any;
   profile: any;
@@ -36,19 +37,10 @@ const ProfileDelivery = (props: IProps) => {
   return (
     <Styled className="profile-delivery">
       <h4 className="title">{title}</h4>
-      <button
-        className="btn"
-        onClick={() =>
-          props.togglePopup({
-            toggle: true,
-            data: {
-              comp: "src/profile/profile.popup.tsx"
-            }
-          })
-        }
-      >
-        {btnUpdate}
-      </button>
+      <InputText placeholder="Write your message"/>
+      <InputText placeholder="Write your message"/>
+      <InputText placeholder="Write your message"/>
+      <button className="btn">{btnUpdate}</button>
     </Styled>
   );
 };

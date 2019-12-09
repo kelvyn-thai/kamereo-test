@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { StyledDropdown } from "./dropdown.styled";
 import { useMouseDown } from "./dropdown.utils";
 import { citiesFactories } from "src/shared/json";
+import withTranslate from "src/shared/components/hoc/withTranslate";
 
-interface IProps {}
+interface IProps {
+  translate: any;
+  onChangeCity: (city: string) => void;
+}
 
 const Styled = styled(StyledDropdown)``;
 
@@ -13,7 +17,7 @@ const DropdownCity = (props: IProps) => {
   const [state, setState] = React.useState({
     toggle: false,
     selected: {
-      city: "City"
+      city: ""
     }
   });
   const handleClickOutside = (e: any) => {
@@ -38,7 +42,9 @@ const DropdownCity = (props: IProps) => {
           })
         }
       >
-        {!!state.selected && state.selected.city}
+        {!!state.selected.city
+          ? state.selected.city
+          : props.translate.dropdown.city.title}
       </div>
       {state.toggle && (
         <div className="extra" ref={ref}>
@@ -46,9 +52,10 @@ const DropdownCity = (props: IProps) => {
             <div
               className="dropdown-item"
               key={index}
-              onClick={() =>
-                setState({ ...state, toggle: !state.toggle, selected: item })
-              }
+              onClick={() => {
+                setState({ ...state, toggle: !state.toggle, selected: item });
+                props.onChangeCity(item.city);
+              }}
             >
               {item.city}
             </div>
@@ -59,4 +66,4 @@ const DropdownCity = (props: IProps) => {
   );
 };
 
-export default DropdownCity;
+export default withTranslate(DropdownCity);

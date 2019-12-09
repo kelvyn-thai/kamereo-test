@@ -6,12 +6,11 @@ interface IProps {
   labelInput: string | "";
   name: string | "";
   value: string | "";
-  onChange: (e: any) => void;
 }
 
 const Styled = styled(StyledInput)``;
 
-const InputPhone = (props: IProps) => {
+const InputPhone = (props: IProps & any) => {
   const { labelInput, ...rest } = props;
   return (
     <Styled className="input-wrapper">
@@ -24,6 +23,7 @@ const InputPhone = (props: IProps) => {
         type="text"
         className="input input-phone"
         pattern="[0-9]*"
+        maxLength="50"
         {...rest}
       />
     </Styled>

@@ -17,24 +17,34 @@ interface IProps {
 
 const ProfilePopup = (props: IProps) => {
   const { title } = props.translate.editProfile;
-  const [state, setState] = React.useState({
+  const initialState = {
+    isFetching: false,
+    isFetched: false,
     file: null,
     preview: "",
     form: {
       name: props.profile.data.name,
       address: props.profile.data.address,
       phone: props.profile.data.phone,
+      district: props.profile.data.district,
+      city: props.profile.data.city,
       redInvoice_name: props.profile.data.redInvoice.name,
       redInvoice_address: props.profile.data.redInvoice.address,
-      redInvoice_taxCode: props.profile.data.redInvoice.taxCode
+      redInvoice_taxCode: props.profile.data.redInvoice.taxCode,
+      redInvoice_district: props.profile.data.redInvoice.district,
+      redInvoice_city: props.profile.data.redInvoice.city
     }
+  };
+  const [state, setState] = React.useState({
+    ...initialState
   });
 
   return (
     <EditProfileContext.Provider
       value={{
         state,
-        setState
+        setState,
+        initialState
       }}
     >
       <Styled className="profile-popup">
