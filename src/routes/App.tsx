@@ -39,6 +39,10 @@ export default compose<IProps, any>(
   enhanceProfile,
   branch(
     (props: any) => !props.profile.isFetched,
-    renderComponent(() => <div>...</div>)
+    renderComponent(() => (
+      <div>
+        <p>Please run 'npm run start:server' to fetch data!</p>
+      </div>
+    ))
   )
 )(App);
