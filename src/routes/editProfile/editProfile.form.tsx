@@ -8,15 +8,11 @@ import InputText from "src/shared/components/input/input.text";
 import InputPhone from "src/shared/components/input/input.phone";
 import InputAddress from "src/shared/components/input/input.address";
 import { EditProfileContext } from ".";
-import {
-  ACTION_UPDATE_PROFILE,
-  ACTION_UDPATE_AVATAR
-} from "../profile/profile.constant";
+import { ACTION_UPDATE_PROFILE } from "../profile/profile.constant";
 
 interface IProps {
   togglePopup: (payload: any) => { type: string; payload: any };
   updateProfile: (payload: any) => { type: string; payload: any };
-  updateAvatar: (payload: any) => { type: string; payload: any };
   translate: any;
 }
 
@@ -58,9 +54,6 @@ const Form = (props: IProps) => {
         ...state,
         isFetching: true
       });
-      const formDt = new FormData();
-      formDt.append("avatar", state.file);
-      await props.updateAvatar(formDt);
       await props.updateProfile({
         name: state.form.name,
         address: state.form.address,
@@ -182,8 +175,7 @@ export default compose<IProps, any>(
     updateProfile: (payload: any) => ({
       type: ACTION_UPDATE_PROFILE,
       payload
-    }),
-    updateAvatar: (payload: any) => ({ type: ACTION_UDPATE_AVATAR, payload })
+    })
   }),
   withTranslate
 )(Form);

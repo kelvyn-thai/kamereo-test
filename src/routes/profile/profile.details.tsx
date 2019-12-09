@@ -72,12 +72,13 @@ const ProfileDetails = (props: IProps) => {
     phone,
     redInvoice,
     city,
-    district
+    district,
+    logoUrl
   } = props.profile.data;
   return (
     <Styled className="profile-details">
       <div className="cover-image">
-        <img src={`images/logo.png`} alt="" />
+        <img src={logoUrl} alt="" />
       </div>
       <div className="extra store-info">
         <h4 className="title">{infoDetails.title}</h4>

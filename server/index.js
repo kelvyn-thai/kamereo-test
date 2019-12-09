@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     cb(null, path.resolve(__dirname, "../public/images"));
   },
   filename: (req, file, cb) => {
-    cb(null, `logo.png`);
+    cb(null, 'logo.png');
   }
 });
 const upload = multer({ storage: storage });
@@ -37,7 +37,7 @@ let dataFactory = {
     city: "Hồ Chí Minh",
     taxCode: "P7774994",
     address: "Nguyen Cuu Van",
-    district: "Bình Thạnh",
+    district: "Bình Thạnh"
   }
 };
 
@@ -63,7 +63,6 @@ app.post("/profile", (req, res) => {
     ...dataFactory,
     ...req.body
   };
-  console.log('req', req.body)
   res.json({
     status: 1,
     data: { ...dataFactory }
@@ -74,7 +73,7 @@ app.put("/profile/update-avatar", upload.single("avatar"), (req, res) => {
   res.json({
     status: 1,
     data: {
-      avatar_url: `${ENVS.API_DOMAIN}/images/logo.png`
+      logoUrl: `${ENVS.API_DOMAIN}/images/${req.file.filename}`
     }
   });
 });

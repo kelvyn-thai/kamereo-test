@@ -5,13 +5,15 @@ import { connect } from "react-redux";
 import withTranslate from "src/shared/components/hoc/withTranslate";
 import { readFile, createImage, rotate, empty } from "src/shared/utils";
 import { EditProfileContext } from ".";
+import { ACTION_UDPATE_AVATAR } from "../profile/profile.constant";
 
 interface IProps {
   profile: any;
   translate: any;
-  handleChangeInput: (e: any) => void;
   preview: string;
+  handleChangeInput: (e: any) => void;
   handleRemoveImagePreview: () => void;
+  updateAvatar: (payload: any) => { type: string; payload: any };
 }
 
 const Styled = styled.div`
@@ -67,6 +69,10 @@ const Avatar = (props: IProps) => {
             file,
             preview: URL.createObjectURL(blob)
           });
+          const formDt = new FormData();
+          console.log(file);
+          formDt.append("avatar", file);
+          props.updateAvatar(formDt);
         })
         .catch((e: any) => {
           console.log(e);
@@ -121,7 +127,9 @@ export default compose<IProps, any>(
     (state: any) => ({
       profile: state.profile
     }),
-    {}
+    {
+      updateAvatar: (payload: any) => ({ type: ACTION_UDPATE_AVATAR, payload })
+    }
   ),
   withTranslate
 )(Avatar);
