@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { enhanceProfile } from "./App.enhance";
 import { ACTION_FETCH_PROFILE } from "./profile/profile.constant";
 import { Switch, Route } from "react-router-dom";
+import { Notifications } from "src/shared/nofitications";
 export interface IProps {
   profile: any;
   fetchProfile: () => void;
@@ -22,6 +23,7 @@ const App = (props: IProps) => {
         </Route>
       </Switch>
       <Popup />
+      <Notifications />
     </Styled>
   );
 };

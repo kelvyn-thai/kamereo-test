@@ -9,10 +9,13 @@ import InputPhone from "src/shared/components/input/input.phone";
 import InputAddress from "src/shared/components/input/input.address";
 import { EditProfileContext } from ".";
 import { ACTION_UPDATE_PROFILE } from "../profile/profile.constant";
+import { actionToggleNotifications as toggleNotifications } from "src/shared/nofitications/notifications.actions";
+import Toast from "./editProfile.toast";
 
 interface IProps {
   togglePopup: (payload: any) => { type: string; payload: any };
   updateProfile: (payload: any) => { type: string; payload: any };
+  toggleNotifications: (payload: any) => { type: string; payload: any };
   translate: any;
 }
 
@@ -74,6 +77,7 @@ const Form = (props: IProps) => {
         isFetched: true
       });
       props.togglePopup({ toggle: false });
+      props.toggleNotifications({ toggle: true, data: <Toast /> });
     } catch (error) {
       setState({
         ...state,
@@ -171,6 +175,7 @@ const Form = (props: IProps) => {
 
 export default compose<IProps, any>(
   connect((state: any) => ({}), {
+    toggleNotifications,
     togglePopup,
     updateProfile: (payload: any) => ({
       type: ACTION_UPDATE_PROFILE,

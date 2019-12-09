@@ -73,6 +73,10 @@ export default {
       },
       btnSave: "Save",
       btnCancel: "Cancel"
+    },
+    toast: {
+      success: "Edit profile success",
+      error: "Something went wrong"
     }
   },
   dropdown: {
