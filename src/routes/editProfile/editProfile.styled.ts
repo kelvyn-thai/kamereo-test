@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { xl, breakpoints } from "src/shared/utils/styled";
 
 export const Styled = styled.div`
   position: absolute;
@@ -11,6 +12,7 @@ export const Styled = styled.div`
   border-radius: 5px;
   overflow-x: hidden;
   overflow-y: auto;
+  min-width: ${breakpoints.xl};
   .block-title {
     display: flex;
     align-items: center;
@@ -51,5 +53,9 @@ export const Styled = styled.div`
     line-height: 18px;
     text-transform: uppercase;
     margin-bottom: 20px;
+  }
+  @media screen and (max-width: ${breakpoints.ex}) {
+    min-width: unset;
+    width: 100%;
   }
 `;

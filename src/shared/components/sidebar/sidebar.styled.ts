@@ -43,6 +43,7 @@ export const Styled = styled.div`
     overflow-y: auto;
     background: #fff;
     border-right: solid 1px #aaa;
+    transition: all 0.3s ease-in;
     .child {
       padding: 30px 20px;
       border-bottom: solid 1px #aaa;

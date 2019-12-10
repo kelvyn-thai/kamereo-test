@@ -16,6 +16,7 @@ export const StyledFonts = styled.div`
 `;
 
 export const Styled = styled(StyledFonts)`
+  min-width: 320px;
   &.open-popup {
     overflow: hidden;
     max-height: 100vh;
