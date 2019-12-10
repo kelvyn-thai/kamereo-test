@@ -99,5 +99,8 @@ export const Styled = styled.div`
       color: #f40000;
       font-family: MavenPro-Bold;
     }
+    .third-child {
+      padding-bottom: 60px;
+    }
   }
 `;
