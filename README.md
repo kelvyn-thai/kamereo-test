@@ -5,7 +5,7 @@ In this project, I used:
 + Redux: Redux Saga
 + Typescript
 + Jest
-+ SCSS / Styled Components 
++ SCSS / Styled Components\ 
 How to run project?
 - Clone or dowload project: 
 + Link: 'https://github.com/phattnh/kamereo-test.git'
