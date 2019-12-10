@@ -20,6 +20,9 @@ const Styled = styled.div`
       transition: all 0.3s ease-out;
     }
   }
+  &.reponsive {
+    padding-left: 0 !important;
+  }
 `;
 
 const enhance = (WrappedComponent: any) => (props: IProps) => {
@@ -36,7 +39,11 @@ const enhance = (WrappedComponent: any) => (props: IProps) => {
         setState
       }}
     >
-      <Styled className={`layout ${!state.hasSidebar ? "no-sidebar" : ""}`}>
+      <Styled
+        className={`layout ${isReponsive ? "reponsive" : ""} ${
+          !state.hasSidebar ? "no-sidebar" : ""
+        }`}
+      >
         <Header />
         {!isReponsive && <Sidebar />}
         <WrappedComponent {...props} />
