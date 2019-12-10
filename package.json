@@ -58,12 +58,18 @@
     "url": "git+https://github.com/phattnh/kamereo-test.git"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.4",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/react-helmet": "^5.0.14",
     "@types/react-router-dom": "^5.1.3",
     "@types/recompose": "^0.30.7",
     "@types/reselect": "^2.2.0",
     "@types/styled-components": "^4.4.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
     "nodemon": "^2.0.1",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "ts-jest": "^24.2.0"
   }
 }
